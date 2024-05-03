@@ -57,7 +57,7 @@
     </div>
     </div>
     <div id="view_record_div">
-        <table class="table">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <td style="font-size: 12px">Patient ID</td>
@@ -154,14 +154,14 @@
         $.ajax({
             url: '../php_backend/fetch_details.php',
             dataType: 'json',
-            data: {id: id}, // Enclose key-value pair in curly braces
-            success: function(data) {
+            data: { id: id }, // Enclose key-value pair in curly braces
+            success: function (data) {
                 // Loop through each hospital in the data
-                $.each(data.data, function(index, hospital) { // Accessing 'data' property to get the actual data
+                $.each(data.data, function (index, hospital) { // Accessing 'data' property to get the actual data
                     // Create a new HTML element for each hospital
                     var hospitalHTML = `
-                        <tr>
-                            <td style="font-size: 12px">${hospital.PatientID}</td>
+                        <tr class="clickable-id" data-id="${hospital.id}">
+                            <td style="font-size: 12px">${hospital.id}</td>
                             <td style="font-size: 12px">${hospital.PatientName}</td>
                             <td style="font-size: 12px">${hospital.Sex}</td>
                             <td style="font-size: 12px">${hospital.Age}</td>
@@ -177,12 +177,19 @@
                     // Append the HTML element to the #list element
                     $('#list').append(hospitalHTML);
                 });
+
+                // Add click event listener to clickable IDs
+                $('.clickable-id').click(function () {
+                    var id = $(this).data('id');
+                    window.location.href = 'add_record?id=' + id; // Replace 'your_link_here' with your actual link
+                });
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 // Handle errors here
                 console.error(xhr, status, error);
             }
         });
+
 
         $('#add_hospital').click(function() {
             $('#add_hospital_div').css('display', 'block');
@@ -197,24 +204,37 @@
             $('#view_record_div').css('display', 'block');
         });
         $('#save_add_hospital').click(function() {
-            var h_name = $('#h_name').val();
-            var h_address = $('#h_address').val();
-            var h_image = $('#h_image')[0].files[0]; // Get the first selected file
+            var patient = $('#patient').val();
+            var date = $('#date').val();
+            var sex = $('#sex').val();
+            var age = $('#age').val();
+            var height = $('#height').val();
+            var weight = $('#weight').val();
+            var symptoms = $('#symptoms').val();
+            var diagnosis = $('#diagnosis').val();
+            var treatment = $('#treatment').val();
+            var status = $('#status').val();
+            var id = <?PHP echo $id?>;
 
-            // Check if any of the required fields are empty
-            if (h_name.trim() === '' || h_address.trim() === '' || !h_image) {
-                alertify.set('notifier', 'position', 'bottom-left');
-                alertify.error('Empty Fields!');
-                return; // Prevent form submission
-            }
 
             var formData = new FormData();
-            formData.append('h_name', h_name);
-            formData.append('h_address', h_address);
-            formData.append('h_image', h_image);
+            formData.append('patient', patient);
+            formData.append('date', date);
+            formData.append('sex', sex);
+            formData.append('age', age);
+            formData.append('height', height);
+            formData.append('weight', weight);
+            formData.append('symptoms', symptoms);
+            formData.append('diagnosis', diagnosis);
+            formData.append('treatment', treatment);
+            formData.append('status', status);
+            formData.append('id', id);
+            
+
+            console.log(formData);
 
             $.ajax({
-                url: '../php_backend/add_hospital.php',
+                url: '../php_backend/add_record.php',
                 type: 'POST',
                 data: formData,
                 processData: false, // Don't process the data
@@ -227,15 +247,24 @@
                     $('#add_hospital_div').css('display', 'none');
                     $('#view_record_div').css('display', 'block');
 
-                    $('#h_name').val('');
-                    $('#h_address').val('');
-                    $('#h_image').val('');
+                    // Clear input fields
+                    $('#patient').val('');
+                    $('#date').val('');
+                    $('#sex').val('');
+                    $('#age').val('');
+                    $('#height').val('');
+                    $('#weight').val('');
+                    $('#symptoms').val('');
+                    $('#diagnosis').val('');
+                    $('#treatment').val('');
+                    $('#status').val('');
                 },
                 error: function(xhr, status, error) {
                     // Handle errors
                     console.error(xhr.responseText);
                 }
-            });
         });
+});
+
     });
 </script>
