@@ -77,7 +77,7 @@
     </div>
     
     <div id="add_hospital_div" class="border rounded p-3 pb-5">
-        <h5>Add Patient Record</h5>
+        <h5>Patient Information</h5>
         <hr>
         <div class="d-flex flex-rowalign-items-center">
             <div style="width: 49%">
@@ -106,11 +106,11 @@
         <div class="d-flex flex-rowalign-items-center mt-3">
             <div style="width: 49%">
                 <p>Height</p>
-                <input value="<?php echo $Height?>" id="height" type="text" class="form-control" placeholder="Enter height">
+                <input value="<?php echo $Height, 'cm'?>" id="height" type="text" class="form-control" placeholder="Enter height">
             </div>
             <div style="width: 49%" class="pl-3">
                 <p>Weight</p>
-                <input value="<?php echo $Weight?>" id="weight" type="text" class="form-control" placeholder="Enter weight">
+                <input value="<?php echo $Weight, 'kg'?>" id="weight" type="text" class="form-control" placeholder="Enter weight">
             </div>
         </div>
         <div class="d-flex flex-rowalign-items-center mt-3">
@@ -137,10 +137,10 @@
             </div>
         </div>
         
-        <div class="d-flex flex-row mt-3 justify-content-end">
+        <!-- <div class="d-flex flex-row mt-3 justify-content-end">
         <button class="btn btn-primary mr-2 btn-sm" id="save_add_hospital">Save</button>
         <button class="btn btn-danger btn-sm" id="cancel_add_hospital_div">Cancel</button>
-        </div>
+        </div> -->
     </div>
 </div>
     
