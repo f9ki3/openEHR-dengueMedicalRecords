@@ -25,7 +25,7 @@
                     $PatientName = $row['PatientName'];
                     $Sex = $row['Sex'];
                     $PatientName = $row['PatientName'];
-                    $Age = $row['Age'];
+                    $Age = $row['age'];
                     $Height = $row['Height'];
                     $Weight = $row['Weight'];
                     $DateOfDiagnosis = $row['DateOfDiagnosis'];

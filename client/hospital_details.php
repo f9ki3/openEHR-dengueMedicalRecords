@@ -48,7 +48,7 @@
 </head>
 <body>
 <?php include 'navbar.php'; ?>
-<div class='container pt-3'>
+<div class='px-5 pt-3'>
     <div class="d-flex flex-row justify-content-between">
     <h4><?php echo $hospital_name?></h4>
     <div>
@@ -60,18 +60,28 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <td style="font-size: 12px">Patient ID</td>
-                    <td style="font-size: 12px">Patient Name</td>
-                    <td style="font-size: 12px">Sex</td>
-                    <td style="font-size: 12px">Age</td>
-                    <td style="font-size: 12px">Height</td>
-                    <td style="font-size: 12px">Weight</td>
-                    <td style="font-size: 12px">Date of Diagnosis</td>
-                    <td style="font-size: 12px">Symptoms</td>
-                    <td style="font-size: 12px">Diagnosis</td>
-                    <td style="font-size: 12px">Treatment</td>
-                    <td style="font-size: 12px">Status</td>
-                    <td style="font-size: 12px">Hospital</td>
+                    <td style="font-size: 12px" width="5%">ID</td>
+                    <td style="font-size: 12px" width="7%">Patient Name</td>
+                    <td style="font-size: 12px" width="2%">Sex</td>
+                    <td style="font-size: 12px" width="2%">Age</td>
+                    <td style="font-size: 12px" width="7%">Birth Date</td>
+                    <td style="font-size: 12px" width="10%">Address</td>
+                    <td style="font-size: 12px" width="3%">Nationality</td>
+                    <td style="font-size: 12px" width="3%">Religion</td>
+                    <td style="font-size: 12px" width="2%">Height</td>
+                    <td style="font-size: 12px" width="2%">Weight</td>
+                    <td style="font-size: 12px" width="7%">Date of Diagnosis</td>
+                    <td style="font-size: 12px" width="5%">Symptoms</td>
+                    <td style="font-size: 12px" width="5%">Diagnosis</td>
+                    <td style="font-size: 12px" width="5%">Treatment</td>
+                    <td style="font-size: 12px" width="5%">Status</td>
+                    <td style="font-size: 12px" width="7%">Hospital</td>
+                    <td style="font-size: 12px" width="5%">Fathers Name</td>
+                    <td style="font-size: 12px" width="5%">Mothers Name</td>
+                    <td style="font-size: 12px" width="5%">Respiratory Rate</td>
+                    <td style="font-size: 12px" width="5%">Temperature</td>
+                    <td style="font-size: 12px" width="5%">Heart Rate</td>
+                    <td style="font-size: 12px" width="5%">Blood Pressure</td>
                 </tr>
             </thead>
             <tbody id="list">
@@ -164,7 +174,11 @@
                             <td style="font-size: 12px">${hospital.id}</td>
                             <td style="font-size: 12px">${hospital.PatientName}</td>
                             <td style="font-size: 12px">${hospital.Sex}</td>
-                            <td style="font-size: 12px">${hospital.Age}</td>
+                            <td style="font-size: 12px">${hospital.age}</td>
+                            <td style="font-size: 12px">${hospital.date_of_birth}</td>
+                            <td style="font-size: 12px">${hospital.address}</td>
+                            <td style="font-size: 12px">${hospital.nationality}</td>
+                            <td style="font-size: 12px">${hospital.religion}</td>
                             <td style="font-size: 12px">${hospital.Height}</td>
                             <td style="font-size: 12px">${hospital.Weight}</td>
                             <td style="font-size: 12px">${hospital.DateOfDiagnosis}</td>
@@ -173,6 +187,12 @@
                             <td style="font-size: 12px">${hospital.Treatment}</td>
                             <td style="font-size: 12px">${hospital.Status}</td>
                             <td style="font-size: 12px">${hospital.hospital_name}</td>
+                            <td style="font-size: 12px">${hospital.mothers_name}</td>
+                            <td style="font-size: 12px">${hospital.fathers_name}</td>
+                            <td style="font-size: 12px">${hospital.RespiratoryRate}</td>
+                            <td style="font-size: 12px">${hospital.Temperature}</td>
+                            <td style="font-size: 12px">${hospital.HeartRate}</td>
+                            <td style="font-size: 12px">${hospital.BloodPressure}</td>
                         </tr>`;
                     // Append the HTML element to the #list element
                     $('#list').append(hospitalHTML);
