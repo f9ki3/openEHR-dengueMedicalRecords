@@ -65,6 +65,15 @@ function random_filipino_surname($filipino_surnames) {
 function random_address($addresses) {
     return $addresses[array_rand($addresses)];
 }
+// Function to generate random 11-digit numbers starting at '09'
+function random_contact() {
+    return '09' . str_pad(mt_rand(0, 999999999), 9, '0', STR_PAD_LEFT);
+}
+
+// Function to generate email address based on first name
+function generate_email($first_name) {
+    return strtolower($first_name) . "@gmail.com";
+}
 
 // Function to generate random records
 function generate_random_record($conn, $addresses, $filipino_names, $filipino_surnames, $id) {
@@ -81,9 +90,15 @@ function generate_random_record($conn, $addresses, $filipino_names, $filipino_su
     $temperature = round(mt_rand(350, 400) / 10, 2);
     $heart_rate = mt_rand(600, 1000) / 10;
     $blood_pressure = mt_rand(90, 140) . "/" . mt_rand(60, 90);
+    $contact = random_contact();
+    
+    // Generate a random Filipino name and email address
+    $first_name = random_filipino_name($filipino_names);
+    $email = generate_email($first_name);
 
     // Update record with provided ID
-    $update_query = "UPDATE patient_records SET nationality = '$nationality', address = '$address', date_of_birth = '$date_of_birth', age = $age, religion = '$religion', mothers_name = '$mothers_name', fathers_name = '$fathers_name', RespiratoryRate = $respiratory_rate, Temperature = $temperature, HeartRate = $heart_rate, BloodPressure = '$blood_pressure' WHERE id = $id";
+    $update_query = "UPDATE patient_records SET nationality = '$nationality', address = '$address', date_of_birth = '$date_of_birth', age = $age, religion = '$religion', mothers_name = '$mothers_name', fathers_name = '$fathers_name', RespiratoryRate = $respiratory_rate, Temperature = $temperature, HeartRate = $heart_rate, BloodPressure = '$blood_pressure', contact = '$contact', email = '$email' WHERE id = $id";
+    
     if (mysqli_query($conn, $update_query)) {
         echo "Record with ID $id updated successfully<br>";
     } else {

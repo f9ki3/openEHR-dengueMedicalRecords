@@ -24,7 +24,6 @@
                     $row = $result->fetch_assoc();
                     $PatientName = $row['PatientName'];
                     $Sex = $row['Sex'];
-                    $PatientName = $row['PatientName'];
                     $Age = $row['age'];
                     $Height = $row['Height'];
                     $Weight = $row['Weight'];
@@ -33,28 +32,43 @@
                     $Diagnosis = $row['Diagnosis'];
                     $Treatment = $row['Treatment'];
                     $Status = $row['Status'];
+                    $Nationality = $row['nationality'];
+                    $Date_of_birth = $row['date_of_birth'];
+                    $address = $row['address'];
+                    $religion = $row['religion'];
+                    $contact = $row['contact'];
+                    $email = $row['email'];
+                    $m_name = $row['mothers_name'];
+                    $f_name = $row['fathers_name'];
+                    $r_rate = $row['RespiratoryRate'];
+                    $temp = $row['Temperature'];
+                    $h_rate = $row['HeartRate'];
+                    $b_press = $row['BloodPressure'];
+                    $m_name = $row['mothers_name'];
+                    $m_name = $row['mothers_name'];
 
 
                     // Use the fetched values as needed
                     // Example: echo $id, $date, $area, $lot_owner;
 
-                } else {
-                    // No rows found based on the provided $id
-                    // Handle the case where no matching records are found
-                    $row = $result->fetch_assoc();
-                    $PatientName = "N/A";
-                    $Sex = "N/A";
-                    $PatientName = "N/A";
-                    $Age = "N/A";
-                    $Height = "N/A";
-                    $Weight = "N/A";
-                    $DateOfDiagnosis = "N/A";
-                    $Symptoms = "N/A";
-                    $Diagnosis = "N/A";
-                    $Treatment = "N/A";
-                    $Status = "N/A";
+                } 
+                // else {
+                //     // No rows found based on the provided $id
+                //     // Handle the case where no matching records are found
+                //     $row = $result->fetch_assoc();
+                //     $PatientName = "N/A";
+                //     $Sex = "N/A";
+                //     $PatientName = "N/A";
+                //     $Age = "N/A";
+                //     $Height = "N/A";
+                //     $Weight = "N/A";
+                //     $DateOfDiagnosis = "N/A";
+                //     $Symptoms = "N/A";
+                //     $Diagnosis = "N/A";
+                //     $Treatment = "N/A";
+                //     $Status = "N/A";
  
-                }
+                // }
             } else {
                 echo "Error in preparing SQL statement: " . $conn->error;
             }
@@ -76,71 +90,57 @@
     </div>
     </div>
     
-    <div id="add_hospital_div" class="border rounded p-3 pb-5">
-        <h5>Patient Information</h5>
-        <hr>
-        <div class="d-flex flex-rowalign-items-center">
-            <div style="width: 49%">
-                <p>Patient Name</p>
-                <input value="<?php echo $PatientName?>" id="patient" type="text" class="form-control" placeholder="Enter Patient Name">
-            </div>
-            <div style="width: 49%" class="pl-3">
-                <p>Date</p>
-                <input value="<?php echo $DateOfDiagnosis?>" id="date" type="date" class="form-control" placeholder="Enter Hospital Name">
-            </div>
-        </div>
-        <div class="d-flex flex-rowalign-items-center mt-3">
-            <div style="width: 49%">
-                <p>Sex</p>
-                <select id="sex" class="form-control" name="sex">
-                    <option value="M" <?php if ($Sex == "M") echo 'selected="selected"'; ?>>Male</option>
-                    <option value="F" <?php if ($Sex == "F") echo 'selected="selected"'; ?>>Female</option>
-                </select>
+    <div id="add_hospital_div" class="border rounded pb-5">
 
+        <div class="border-bottom p-3">
+            <h3>Patient Information</h3>
+        </div>
+        <div class="d-flex ">
+            <div class="border-bottom p-3 w-50">
+            <h5 >Personal Information</h5>
+            <hr>
+                <p class="m-0 p-0 pb-2">Patient Name: <?php echo $PatientName?></p>
+                <p class="m-0 p-0 pb-2">Birth Date: <?php echo $Date_of_birth?></p>
+                <p class="m-0 p-0 pb-2">Height: <?php echo $Height?>cm</p>
+                <p class="m-0 p-0 pb-2">Contact No: <?php echo $contact?></p>
+                <p class="m-0 p-0 pb-2">Address: <?php echo $address?></p>
             </div>
-            <div style="width: 49%" class="pl-3">
-                <p>Age</p>
-                <input value="<?php echo $Age?>" id="age" type="text" class="form-control" placeholder="Enter age">
+            <div class="border-bottom p-3 w-50">
+                <p class="m-0 p-0 pt-1 pb-2 mt-5">Sex: <?php echo $Sex?></p>
+                <p class="m-0 p-0 pb-2">Age: <?php echo $Date_of_birth?></p>
+                <p class="m-0 p-0 pb-2">Weight: <?php echo $Weight?>kg</p>
+                <p class="m-0 p-0 pb-2">Email Address: <?php echo $email?></p>
             </div>
         </div>
-        <div class="d-flex flex-rowalign-items-center mt-3">
-            <div style="width: 49%">
-                <p>Height</p>
-                <input value="<?php echo $Height, 'cm'?>" id="height" type="text" class="form-control" placeholder="Enter height">
+        <div class="d-flex ">
+            <div class="border-bottom p-3 w-50">
+                <h5>Other Information</h5>
+                <hr>
+                <p class="m-0 p-0 pb-2">Nationality: <?php echo $Nationality?></p>
+                <p class="m-0 p-0 pb-2">Religion: <?php echo $religion?></p>
+                <p class="m-0 p-0 pb-2">Mothers Name: <?php echo $m_name?></p>
+                <p class="m-0 p-0 pb-2">Fathers Name: <?php echo $f_name?></p>
             </div>
-            <div style="width: 49%" class="pl-3">
-                <p>Weight</p>
-                <input value="<?php echo $Weight, 'kg'?>" id="weight" type="text" class="form-control" placeholder="Enter weight">
-            </div>
-        </div>
-        <div class="d-flex flex-rowalign-items-center mt-3">
-            <div style="width: 49%">
-                <p>Symptoms</p>
-                <textarea placeholder="<?php echo $Symptoms?>" name="" id="symptoms" style="width: 100%" class="border border-muted rounded" cols="30" rows="5"></textarea>
-            </div>
-            <div style="width: 49%" class="ml-3">
-                <p>Diagnosis</p>
-                <textarea placeholder='<?php echo $Diagnosis?>' name="" id="diagnosis" style="width: 100%" class="border border-muted rounded" cols="30" rows="5"></textarea>
+            <div class="border-bottom p-3 w-50">
+                <h5>Vital Signs</h5>
+                <hr>
+                <p class="m-0 p-0 pb-2">Respiratory Rate: <?php echo $r_rate?></p>
+                <p class="m-0 p-0 pb-2">Temparature: <?php echo $temp?></p>
+                <p class="m-0 p-0 pb-2">Heart Rate: <?php echo $h_rate?></p>
+                <p class="m-0 p-0 pb-2">Blood Pressure: <?php echo $b_press?></p>
             </div>
         </div>
-        <div class="d-flex flex-rowalign-items-center mt-3">
-            <div style="width: 49%">
-                <p>Treatment</p>
-                <textarea placeholder='<?php echo $Treatment?>' name="" id="treatment" style="width: 100%" class="border border-muted rounded" cols="30" rows="5"></textarea>
-            </div>
-            <div style="width: 49%" class="ml-3">
-                <p>Status</p>
-                <select id="status" class="form-control" name="status">
-                    <option value="Positive" <?php if ($Status == "Positive") echo 'selected="selected"'; ?>>Positive</option>
-                    <option value="Negative" <?php if ($Status == "Negative") echo 'selected="selected"'; ?>>Negative</option>
-                </select>
+        <div class="d-flex ">
+            <div class="border-bottom p-3 w-100">
+                <h5>Diagnosis Report</h5>
+                <hr>
+                <p class="m-0 p-0 pb-2">Date of Diagnosis: <?php echo $DateOfDiagnosis?></p>
+                <p class="m-0 p-0 pb-2">Symptoms: <?php echo $Symptoms?></p>
+                <p class="m-0 p-0 pb-2">Diagnosis: <?php echo $Diagnosis?></p>
+                <p class="m-0 p-0 pb-2">Status: <?php echo $Status?></p>
+                <p class="m-0 p-0 pb-2">Treatment: <?php echo $Treatment?></p>
             </div>
         </div>
-        
-        <!-- <div class="d-flex flex-row mt-3 justify-content-end">
-        <button class="btn btn-primary mr-2 btn-sm" id="save_add_hospital">Save</button>
-        <button class="btn btn-danger btn-sm" id="cancel_add_hospital_div">Cancel</button>
-        </div> -->
     </div>
 </div>
     
