@@ -32,7 +32,7 @@
                     $Diagnosis = $row['Diagnosis'];
                     $Treatment = $row['Treatment'];
                     $Status = $row['Status'];
-                    $Nationality = $row['nationality'];
+                    $Nationality = $row['Nationality'];
                     $Date_of_birth = $row['date_of_birth'];
                     $address = $row['address'];
                     $religion = $row['religion'];

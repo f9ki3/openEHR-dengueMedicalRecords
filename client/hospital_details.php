@@ -177,7 +177,7 @@
                             <td style="font-size: 12px">${hospital.age}</td>
                             <td style="font-size: 12px">${hospital.date_of_birth}</td>
                             <td style="font-size: 12px">${hospital.address}</td>
-                            <td style="font-size: 12px">${hospital.nationality}</td>
+                            <td style="font-size: 12px">${hospital.Nationality}</td>
                             <td style="font-size: 12px">${hospital.religion}</td>
                             <td style="font-size: 12px">${hospital.Height}</td>
                             <td style="font-size: 12px">${hospital.Weight}</td>

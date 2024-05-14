@@ -65,6 +65,7 @@ function random_filipino_surname($filipino_surnames) {
 function random_address($addresses) {
     return $addresses[array_rand($addresses)];
 }
+
 // Function to generate random 11-digit numbers starting at '09'
 function random_contact() {
     return '09' . str_pad(mt_rand(0, 999999999), 9, '0', STR_PAD_LEFT);
@@ -82,22 +83,44 @@ function generate_random_record($conn, $addresses, $filipino_names, $filipino_su
     $nationality = "Filipino";
     $date_of_birth = random_dob('1970-01-01', '2010-01-01');
     $age = calculate_age($date_of_birth);
-    $religions = ['Christianity', 'Catholicism', 'Islam', 'Hinduism', 'Buddhism', 'Judaism', 'Others'];
+    $religions = ['Roman Catholic', 'Christianity', 'Islam'];
     $religion = $religions[array_rand($religions)];
     $mothers_name = random_filipino_name($filipino_names) . ' ' . random_filipino_surname($filipino_surnames);
     $fathers_name = random_filipino_name($filipino_names) . ' ' . random_filipino_surname($filipino_surnames);
-    $respiratory_rate = round(mt_rand(1000, 3000) / 100, 2);
     $temperature = round(mt_rand(350, 400) / 10, 2);
-    $heart_rate = mt_rand(600, 1000) / 10;
-    $blood_pressure = mt_rand(90, 140) . "/" . mt_rand(60, 90);
     $contact = random_contact();
-    
+
     // Generate a random Filipino name and email address
     $first_name = random_filipino_name($filipino_names);
     $email = generate_email($first_name);
 
+    // Retrieve diagnosis for the current record
+    $diagnosis_query = "SELECT Diagnosis FROM patient_records WHERE id = $id";
+    $diagnosis_result = mysqli_query($conn, $diagnosis_query);
+    $diagnosis_row = mysqli_fetch_assoc($diagnosis_result);
+    $diagnosis = $diagnosis_row['Diagnosis'];
+
+    // Determine Status and set RespiratoryRate and BloodPressure accordingly
+    if (in_array($diagnosis, ["Tuberculosis", "Pulmonary issues", "Pneumonia"])) {
+        $status = (mt_rand(0, 1) === 0) ? 'Negative' : 'Positive';
+        $respiratory_rate = $status === 'Negative' ? mt_rand(16, 20) : mt_rand(16, 23);
+    } else {
+        $status = 'Negative';
+        $respiratory_rate = round(mt_rand(1600, 2300) / 100, 2);
+    }
+
+    if ($diagnosis === "Hypertension") {
+        $blood_pressures = ["140/110", "130/90", "150/80", "160/100"];
+    } else {
+        $blood_pressures = ["120/80", "110/80", "110/70", "120/70"];
+    }
+    $blood_pressure = $blood_pressures[array_rand($blood_pressures)];
+
+    // Set pulserate
+    $pulserate = mt_rand(60, 100);
+
     // Update record with provided ID
-    $update_query = "UPDATE patient_records SET nationality = '$nationality', address = '$address', date_of_birth = '$date_of_birth', age = $age, religion = '$religion', mothers_name = '$mothers_name', fathers_name = '$fathers_name', RespiratoryRate = $respiratory_rate, Temperature = $temperature, HeartRate = $heart_rate, BloodPressure = '$blood_pressure', contact = '$contact', email = '$email' WHERE id = $id";
+    $update_query = "UPDATE patient_records SET nationality = '$nationality', address = '$address', date_of_birth = '$date_of_birth', age = $age, religion = '$religion', mothers_name = '$mothers_name', fathers_name = '$fathers_name', RespiratoryRate = $respiratory_rate, Temperature = $temperature, HeartRate = $pulserate, BloodPressure = '$blood_pressure', contact = '$contact', email = '$email', Status = '$status' WHERE id = $id";
     
     if (mysqli_query($conn, $update_query)) {
         echo "Record with ID $id updated successfully<br>";
